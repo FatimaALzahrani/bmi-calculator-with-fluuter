@@ -1,7 +1,9 @@
 import 'package:BMI_calculator/components/round_button_icon.dart';
+import 'package:BMI_calculator/screens/results_page.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
+import '../calculator_brain.dart';
 import '../components/bottom_button.dart';
 import '../components/icon_content.dart';
 import '../components/reusable_card.dart';
@@ -223,8 +225,17 @@ class _InputPageState extends State<InputPage> {
           BottomButton(
             buttonText: 'حساب',
             onTap: () {
-
-
+              CalculatorBrain calc =
+              CalculatorBrain(height: height, weight: weight);
+              Navigator.pushNamed(
+                context,
+                ResultPage.routeName,
+                arguments: ResultPage(
+                  bmiResult: calc.calculateBMI(),
+                  resultText: calc.getResult(),
+                  interpretation: calc.getInterpretation(),
+                ),
+              );
             },
           ),
         ],
